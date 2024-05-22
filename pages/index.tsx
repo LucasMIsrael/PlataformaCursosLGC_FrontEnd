@@ -26,7 +26,7 @@ const HomeNotAuth = function ({ course }: IndexPageProps) {
       <Head>
         <title>SkillUp – Plataforma de Cursos</title>
         <link rel="shortcut icon" href="/logoCurso.png" type="image/x-icon" />
-        <meta property="og:title" content="Onebitflix" key="title" />
+        <meta property="og:title" content="SkillUp" key="title" />
         <meta name="description" content="Tenha acesso aos melhores conteúdos sobre programação de uma forma simples e fácil." />
       </Head>
       <main>
