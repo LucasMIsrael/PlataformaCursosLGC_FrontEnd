@@ -1,5 +1,5 @@
 Nomes: Lucas Mendes Israel;
-       Gustavo Henrique Costa.
+Gustavo Henrique Costa.
 
 ESTE É O REPOSITÓRIO DO FRONEND, DEVE SER EXECUTADO APÓS A EXECUÇÃO DO BACKEND.
 
@@ -11,4 +11,4 @@ para acessar o site: http://localhost:3001
 pode criar um usuário novo para acessar o site, algumas funcionalidades como a de assistir vídeo ainda não são possíveis de serem visualizadas frontend, mas já estão funcionando e testadas via Postman.
 
 Como o backend está completo, várias informações em tela como cursos, categorias, thumbnails e sinopses já estão sendo requisitadas do backend com sucesso.
-No Frontend, ja foi desenvolvido: tela sem login, tela de login e cadastro, tela de Home logada e botão de Sair.
+No Frontend, ja foi desenvolvido: tela sem login, tela de login e cadastro, tela de Home logada, estrutura visual dos "Meus dados" e botão de Sair. Tudo que foi feito já está conectado com o backend, menos o "Meus dados" no perfil.
