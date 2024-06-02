@@ -3,8 +3,10 @@ import styles from "../../../../styles/profile.module.scss";
 import { FormEvent, useEffect, useState } from "react";
 import profileService from "@/src/services/profileService";
 import ToastComponent from "../../common/toast";
+import { useRouter } from "next/router";
 
 const UserForm = function () {
+  const router = useRouter();
   const [color, setColor] = useState("");
   const [toastIsOpen, setToastIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -12,7 +14,10 @@ const UserForm = function () {
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [initialEmail, setInitialEmail] = useState(email);
   const [created_at, setCreated_at] = useState("");
+  const date = new Date(created_at);
+  const month = date.toLocaleDateString("default", { month: "long" });
 
   useEffect(() => {
     profileService.fetchCurrent().then((user) => {
@@ -20,7 +25,8 @@ const UserForm = function () {
       setLastName(user.lastName);
       setPhone(user.phone);
       setEmail(user.email);
-      setCreated_at(user.created_at);
+      setInitialEmail(user.email);
+      setCreated_at(user.createdAt);
     });
   }, []);
 
@@ -40,6 +46,10 @@ const UserForm = function () {
       setErrorMessage("Informações alteradas com sucesso!");
       setColor("bg-success");
       setTimeout(() => setToastIsOpen(false), 1000 * 3);
+      if (email != initialEmail){
+        sessionStorage.clear();
+        router.push('/');
+      }
     } else {
       setToastIsOpen(true);
       setErrorMessage("Você não pode mudar para esse email!");
@@ -58,12 +68,13 @@ const UserForm = function () {
           </p>
           <p className={styles.userName}>{`${firstName} ${lastName}`}</p>
         </div>
-        <div className={styles.memberTime}>
+        {/* <div className={styles.memberTime}>
           <img src="/logoCurso.png" alt="iconProfile" className={styles.memberTimeImg} />
           <p className={styles.memberTimeText}>
-            Membro desde <br /> 20 de fevereiro de 2002
+            Membro desde <br />
+            {`${date.getDate()} de ${month} de ${date.getFullYear()}`}
           </p>
-        </div>
+        </div> */}
         <hr />
         <div className={styles.inputFlexDiv}>
           <FormGroup>
