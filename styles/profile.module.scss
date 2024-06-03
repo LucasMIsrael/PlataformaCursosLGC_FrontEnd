@@ -1,10 +1,12 @@
 @import "./colors.module.scss";
+
 .formPai {
   border: 1px solid $darkGray;
   padding: 20px 30px;
   max-width: 100%;
   margin-right: 200px;
 }
+
 .formName {
   display: flex;
   align-items: center;
@@ -14,6 +16,7 @@
   margin: 20px auto;
   text-transform: uppercase;
 }
+
 .nameAbbreviation {
   font-size: 40px;
   font-weight: bold;
@@ -26,19 +29,23 @@
   align-items: center;
   justify-content: center;
 }
+
 .userName {
   font-size: 30px;
   font-weight: bold;
   word-break: break-all;
 }
+
 .memberTime {
   display: flex;
   justify-content: center;
   gap: 10px;
 }
+
 .memberTimeImg {
   width: 60px;
 }
+
 .memberTimeText {
   padding-top: 8px;
   font-size: 14px;
@@ -49,12 +56,14 @@
   font-size: 14px;
   font-weight: bold;
 }
+
 .inputFlexDiv {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 50px;
 }
+
 .inputFlex {
   width: 250px;
   background-color: transparent;
@@ -62,9 +71,11 @@
   color: white;
   transition: 0.3s;
   text-transform: uppercase;
+
   &::placeholder {
     color: $lightGray;
   }
+
   &:focus {
     box-shadow: none;
     border-color: $lightBlue;
@@ -72,6 +83,7 @@
     color: white;
   }
 }
+
 .inputNormalDiv {
   display: flex;
   flex-direction: column;
@@ -79,11 +91,13 @@
   margin-top: 20px;
   gap: 20px;
 }
+
 .input {
   @extend .inputFlex;
   text-transform: lowercase;
   width: 550px;
 }
+
 .formBtn {
   border-color: $lightBlue;
   text-align: center;
@@ -92,11 +106,15 @@
   font-size: 15px;
   padding: 6px 20px;
   transition: 0.4s;
+  display: block;
+  margin: 10px auto;
+
   &:hover {
     border-color: $darkBlue;
     background-color: transparent;
     color: $lightGray;
   }
+
   &:focus {
     box-shadow: none;
     outline: none;
@@ -108,19 +126,28 @@
   font-weight: bold;
   padding: 0px 0px 50px 0px;
 }
+
 .renderFormBtn {
   display: block;
   width: 200px;
   border: 1px solid $darkGray;
-  color: white;
+  background-color: transparent;
   font-weight: bold;
   margin: 0 auto;
   margin-left: 32px;
   padding: 14px 0px;
+
   &:hover {
     background-color: transparent;
-    border-color: $lightBlue;
-    color: $lightGray;
+    color: $lightBlue;
+  }
+  &:active{
+    background-color: transparent;
+    box-shadow: none;
+  }
+  &:focus{
+    background-color: transparent;
+    box-shadow: none;
   }
 }
 
@@ -136,9 +163,11 @@
   .formPai {
     margin-right: 60px;
   }
+
   .title {
     text-align: center;
   }
+
   .btnColumn {
     width: 100%;
     margin-bottom: 40px;
@@ -149,12 +178,15 @@
   .formPai {
     margin-right: 10px;
   }
+
   .inputFlexDiv {
     gap: 30px;
   }
+
   .inputFlex {
     width: 400px;
   }
+
   .input {
     width: 400px;
   }
@@ -164,17 +196,21 @@
   .formPai {
     margin-right: 10px;
   }
+
   .title {
     font-size: 35px;
   }
+
   .formName {
     width: 95%;
   }
+
   .nameAbbreviation {
     font-size: 30px;
     min-width: 60px;
     min-height: 60px;
   }
+
   .userName {
     font-size: 30px;
   }
@@ -188,6 +224,7 @@
   .inputFlex {
     width: 100%;
   }
+
   .input {
     width: 100%;
   }
@@ -207,6 +244,7 @@
     min-width: 40px;
     min-height: 40px;
   }
+
   .userName {
     font-size: 20px;
   }
