@@ -16,11 +16,11 @@ const UserInfo = function () {
         <title>SkillUp - Meus Dados</title>
         <link rel="shortcut icon" href="/logoCurso.png" type="image/x-icon" />
       </Head>
-      <main>
+      <main className={styles.main}>
         <div className={styles.header}>
           <HeaderAuth />
         </div>
-        <Container className="py-5">
+        <Container className={styles.gridContainer}>
           <p className={styles.title}>Minha Conta</p>
           <Row className="pt-3 pb-5">
             <Col mc={4} className={styles.btnColumn}>
@@ -45,9 +45,7 @@ const UserInfo = function () {
                 SENHA
               </Button>
             </Col>
-            <Col md>
-              {form === "userForm" ? <UserForm /> : <PasswordForm />}
-            </Col>
+            <Col md>{form === "userForm" ? <UserForm /> : <PasswordForm />}</Col>
           </Row>
         </Container>
       </main>
