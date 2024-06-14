@@ -10,135 +10,120 @@ import EpisodeList from "@/src/components/episodesList";
 import Footer from "@/src/components/common/footer";
 
 const CoursePage = function () {
-    const [course, setCourse] = useState<CourseType>();
-    const [liked, setLiked] = useState(false);
-    const [favorited, setFavorited] = useState(false);
-    const router = useRouter();
-    const { id } = router.query;
+  const [course, setCourse] = useState<CourseType>();
+  const [liked, setLiked] = useState(false);
+  const [favorited, setFavorited] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const { id } = router.query;
 
-    const getCourse = async function () {
-        if (typeof id !== "string") return;
+  useEffect(() => {
+    if (!sessionStorage.getItem("skillup-token")) {
+      router.push("/login");
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
-        const res = await courseService.getEpisodes(id);
+  const getCourse = async function () {
+    if (typeof id !== "string") return;
 
-        if (res.status === 200) {
-            setCourse(res.data);
-            setLiked(res.data.liked);
-            setFavorited(res.data.favorited);
-        }
-    };
+    const res = await courseService.getEpisodes(id);
 
-    useEffect(() => {
-        getCourse();
-    }, [id]);
+    if (res.status === 200) {
+      setCourse(res.data);
+      setLiked(res.data.liked);
+      setFavorited(res.data.favorited);
+    }
+  };
 
-    const handleLikeCourse = async () => {
-        if (typeof id !== "string") return;
+  useEffect(() => {
+    getCourse();
+  }, [id]);
 
-        if (liked === true) {
-            await courseService.removeLike(id);
-            setLiked(false);
-        } else {
-            await courseService.like(id);
-            setLiked(true);
-        }
-    };
+  const handleLikeCourse = async () => {
+    if (typeof id !== "string") return;
 
-    const handleFavCourse = async () => {
-        if (typeof id !== "string") return;
+    if (liked === true) {
+      await courseService.removeLike(id);
+      setLiked(false);
+    } else {
+      await courseService.like(id);
+      setLiked(true);
+    }
+  };
 
-        if (favorited === true) {
-            await courseService.removeFav(id);
-            setFavorited(false);
-        } else {
-            await courseService.addToFav(id);
-            setFavorited(true);
-        }
-    };
+  const handleFavCourse = async () => {
+    if (typeof id !== "string") return;
 
-    if (course === undefined) return <PageSpinner />;
+    if (favorited === true) {
+      await courseService.removeFav(id);
+      setFavorited(false);
+    } else {
+      await courseService.addToFav(id);
+      setFavorited(true);
+    }
+  };
 
-    return (
-        <>
-            <Head>
-                <title>SkillUp - {course?.name}</title>
-                <link rel="shortcut icon" href="/logoCurso.png" type="image/x-icon" />
-            </Head>
-            <main>
-                <div
-                    style={{
-                        backgroundImage: `linear-gradient(to bottom, #6666661a, #151515),
+  if (course === undefined) return <PageSpinner />;
+
+  if (loading) {
+    return <PageSpinner />;
+  }
+
+  return (
+    <>
+      <Head>
+        <title>SkillUp - {course?.name}</title>
+        <link rel="shortcut icon" href="/logoCurso.png" type="image/x-icon" />
+      </Head>
+      <main>
+        <div
+          style={{
+            backgroundImage: `linear-gradient(to bottom, #6666661a, #151515),
 	                    url(${process.env.NEXT_PUBLIC_BASEURL}/${course?.thumbnailUrl})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        minHeight: "600px",
-                    }}
-                >
-                    <HeaderAuth />
-                </div>
-                <Container className={styles.courseInfo}>
-                    <p className={styles.courseTitle}>{course?.name}</p>
-                    <p className={styles.courseDescription}>{course?.synopsis}</p>
-                    <Button outline className={styles.courseBtn} disabled={course?.episodes?.length === 0 ? true : false}>
-                        ASSISTIR AGORA!
-                        <img
-                            src="/buttonPlay.png"
-                            alt="buttonImg"
-                            className={styles.buttonImg}
-                        />
-                    </Button>
-                    <div className={styles.interactions}>
-                        {liked === false ? (
-                            <img
-                                src="/course/iconLike.svg"
-                                alt="likeImage"
-                                className={styles.interactionImages}
-                                onClick={handleLikeCourse}
-                            />
-                        ) : (
-                            <img
-                                src="/course/iconLiked.svg"
-                                alt="likedImage"
-                                className={styles.interactionImages}
-                                onClick={handleLikeCourse}
-                            />
-                        )}
-                        {favorited === false ? (
-                            <img
-                                onClick={handleFavCourse}
-                                src="/course/iconAddFav.svg"
-                                alt="addFav"
-                                className={styles.interactionImages}
-                            />
-                        ) : (
-                            <img
-                                onClick={handleFavCourse}
-                                src="/course/iconFavorited.svg"
-                                alt="favorited"
-                                className={styles.interactionImages}
-                            />
-                        )}
-                    </div>
-                </Container>
-                <Container className={styles.episodeInfo}>
-                    <p className={styles.episodeDivision}>EPISÓDIOS</p>
-                    <p className={styles.episodeLength}>
-                        {course?.episodes && course?.episodes.length} episódios
-                    </p>
-                    {course?.episodes?.length === 0 ? (
-                        <p>
-                            <strong>Não temos episódios ainda, volte mais tarde... &#x1F643;</strong>
-                        </p>
-                    ) : (
-                        course?.episodes?.map((episode) => (
-                            <EpisodeList key={episode.id} episode={episode} course={course} />
-                        ))
-                    )}
-                </Container>
-                <Footer />
-            </main>
-        </>
-    );
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            minHeight: "600px",
+          }}
+        >
+          <HeaderAuth />
+        </div>
+        <Container className={styles.courseInfo}>
+          <p className={styles.courseTitle}>{course?.name}</p>
+          <p className={styles.courseDescription}>{course?.synopsis}</p>
+          <Button outline className={styles.courseBtn} disabled={course?.episodes?.length === 0 ? true : false}>
+            ASSISTIR AGORA!
+            <img src="/buttonPlay.png" alt="buttonImg" className={styles.buttonImg} />
+          </Button>
+          <div className={styles.interactions}>
+            {liked === false ? (
+              <img src="/course/iconLike.svg" alt="likeImage" className={styles.interactionImages} onClick={handleLikeCourse} />
+            ) : (
+              <img src="/course/iconLiked.svg" alt="likedImage" className={styles.interactionImages} onClick={handleLikeCourse} />
+            )}
+            {favorited === false ? (
+              <img onClick={handleFavCourse} src="/course/iconAddFav.svg" alt="addFav" className={styles.interactionImages} />
+            ) : (
+              <img onClick={handleFavCourse} src="/course/iconFavorited.svg" alt="favorited" className={styles.interactionImages} />
+            )}
+          </div>
+        </Container>
+        <Container className={styles.episodeInfo}>
+          <p className={styles.episodeDivision}>EPISÓDIOS</p>
+          <p className={styles.episodeLength}>{course?.episodes && course?.episodes.length} episódios</p>
+          {course?.episodes?.length === 0 ? (
+            <p>
+              <strong>Não temos episódios ainda, volte mais tarde... &#x1F643;</strong>
+            </p>
+          ) : (
+            course?.episodes?.map((episode) => <EpisodeList key={episode.id} episode={episode} course={course} />)
+          )}
+        </Container>
+        <Footer />
+      </main>
+    </>
+  );
 };
 
 export default CoursePage;
