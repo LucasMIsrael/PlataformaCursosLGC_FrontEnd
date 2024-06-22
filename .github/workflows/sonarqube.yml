@@ -31,7 +31,8 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn clean verify sonar:sonar \
+          sonar-scanner \
             -Dsonar.projectKey=<project_key> \
-            -Dsonar.host.url=<sonarqube_server_url> \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=http://localhost:9099 \
             -Dsonar.login=${{ env.SONAR_TOKEN }}
