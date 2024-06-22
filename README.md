@@ -1,7 +1,7 @@
 Nomes: Lucas Mendes Israel;
 Gustavo Henrique Costa.
 
-ESTE É O REPOSITÓRIO DO FRONEND, DEVE SER EXECUTADO APÓS A EXECUÇÃO DO BACKEND.
+ESTE É O REPOSITÓRIO DO FRONTEND, DEVE SER EXECUTADO APÓS A EXECUÇÃO DO BACKEND.
 
 Este é o projeto principal, onde o usuário padrão poderá assistir os cursos.
 
