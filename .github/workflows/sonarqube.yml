@@ -32,7 +32,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           sonar-scanner \
-            -Dsonar.projectKey=<project_key> \
+            -Dsonar.projectKey=plataforma_cursos \
             -Dsonar.sources=. \
             -Dsonar.host.url=http://localhost:9099 \
             -Dsonar.login=${{ env.SONAR_TOKEN }}
