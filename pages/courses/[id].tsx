@@ -125,5 +125,4 @@ const CoursePage = function () {
     </>
   );
 };
-
 export default CoursePage;
