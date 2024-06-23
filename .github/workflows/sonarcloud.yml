@@ -25,4 +25,4 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=PlataformaCursosLGC_FrontEnd
-            -Dsonar.organization=Lucas Mendes Israel
+            -Dsonar.organization=lucasmisrael
